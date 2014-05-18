@@ -1,0 +1,4 @@
+git cherry pick
+git remove objects
+git visual guide
+git flow + smartgit

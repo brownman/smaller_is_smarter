@@ -1,0 +1,53 @@
+The syntax is following: 
+sendEmail -v –f $EMAIL_FROM -s smtp.gmail.com:587 -xu p$USERNAME –xp $PASSWORD –t $EMAIL_TO -o tls=yes –u $SUBJECT –m $MESSAGE
+
+But after I tried it I got following message: 
+ERROR => No TLS support!  SendEmail can’t load required libraries. (try installing Net::SSLeay and IO::Socket::SSL
+
+This fixed the problem: 
+
+
+local str_res=$( eval "$cmd" )
+echo "res  $?"
+exit 
+local num_res="$?"
+
+echo "str_res $str_res"
+echo
+echo "num_res $num_res"
+
+steps(){
+        set_env
+        print_dialog
+    }
+    steps
+    echo "$str"
+    return $res
+
+if  [ -f "$file" ];then
+    ls -l $file
+cmd=$file
+echo "cmd: $cmd"
+echo
+arr=()
+str=$( eval "$cmd" )
+res=$?
+echo res $res
+
+else
+echo "Error] no such file: $file"
+fi
+
+     #       res=$( eval "$cmd" )
+        #local res1=$?
+        if [ "$res" = '' ];then
+            echo  exiting
+            exit
+        fi
+        echo  "res: $res"
+
+#        cmd="yad --quoted-output --timeout 20 --title 'show_arr' --form    --text "arr"   \
+#            --button='gtk-close:1'  --button='gtk-ok:0' --entry-text "
+#--button='gtk-close:0' --button='gtk-ok:1' "
+#                cmd="yad --title show_arr --form --text 'array inspection'"
+

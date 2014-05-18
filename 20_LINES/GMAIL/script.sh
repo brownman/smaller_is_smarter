@@ -12,13 +12,14 @@
 #files:     gmail_group_10_lines{.cfg .sh .md .contacts}
 set_env(){
 set -o nounset
-source gmail_group_10_lines.cfg
+source config.cfg
 }
 unread(){
     curl -u $user:$password --silent "https://mail.google.com/mail/feed/atom" | tr -d '\n' | awk -F '<entry>' '{for (i=2; i<=NF; i++) {print $i}}' | sed -n "s/<title>\(.*\)<\/title.*name>\(.*\)<\/name>.*/\ \1/p";
     [ $? -eq 0 ] && { notify-send "OK" "retrieving" ; } || {  notify-send "Error" "retrieving" ; exit 1; }  
 }
 compose(){  
+    
     local msg=$( gxmessage -entrytext "$str_first" -sticky -ontop -timeout 3000  -file $file_unread -title "Compose:" )
     if [ -n "$msg" ];then
         echo -e "Subject:${nickname}: $msg" > $file_compose
@@ -34,4 +35,5 @@ steps(){
      unread 1> $file_unread
      compose
 }
+str_first=${1:-''}
 steps
