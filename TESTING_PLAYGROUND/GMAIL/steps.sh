@@ -41,14 +41,17 @@ act(){
     res=$?
     echo $res
     case $res in
-        3)
+        0)
+            echo "[Good bye]"
+            ;;
+        2)
 str=`            cat $dir_txt/talk_to.txt`
             xcowsay "$str"
             ;;
-        2)
+        1)
         $dir_ext/print_monkey.sh 
             ;;
-        1)
+        3)
                 echo $str
             str_to_arr "$str"
             str=`echo "$str" | sed 's/(null)/xxx/g'`
