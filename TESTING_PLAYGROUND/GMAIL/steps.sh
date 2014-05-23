@@ -1,4 +1,6 @@
-#http://www.cyberciti.biz/tips/linux-use-gmail-as-a-smarthost.html
+#yad.source: file.selection: http://code.google.com/p/yad/source/browse/trunk/src/file.c
+#url.yad-examples: http://code.google.com/p/yad/wiki/Examples
+#url.mail sending: http://www.cyberciti.biz/tips/linux-use-gmail-as-a-smarthost.html
 #depend_package: xcowsay fortune
 reset
 set -o nounset
@@ -41,17 +43,17 @@ act(){
     res=$?
     echo $res
     case $res in
-        0)
+        1)
             echo "[Good bye]"
             ;;
-        2)
+        3)
 str=`            cat $dir_txt/talk_to.txt`
             xcowsay "$str"
             ;;
-        1)
+        2)
         $dir_ext/print_monkey.sh 
             ;;
-        3)
+        0)
                 echo $str
             str_to_arr "$str"
             str=`echo "$str" | sed 's/(null)/xxx/g'`
@@ -81,12 +83,16 @@ str=`            cat $dir_txt/talk_to.txt`
     esac 
     #show_args 
 }
-
+reminder(){
+    echo "[YAD EXAMPLES]"
+    echo http://code.google.com/p/yad/source/browse/wiki/#wiki
+}
 steps(){
     set_env
     exporting
     sourcing
     act
+    reminder
 }
 steps
 echo the end

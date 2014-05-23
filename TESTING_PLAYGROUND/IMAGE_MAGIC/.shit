@@ -1,0 +1,12 @@
+  @echo off
+    set IMAGE=%1
+    set SUFFIX=%2
+    convert %IMAGE%.%SUFFIX% ( +clone -fx p{0,0} ) -compose Difference -composite -modulate 100,0 -alpha off  %IMAGE%_difference.png
+    convert %IMAGE%.%SUFFIX% %IMAGE%_difference.png -compose Copy_Opacity -composite %IMAGE%_trans.png
+
+    for /l %%x in (1, 1, 20) do (
+        convert %IMAGE%_trans.png  +clone  -background none   -flatten   %IMAGE%_trans.png
+        #        ping -n 2 127.0.0.1 >nul
+
+        )
+
